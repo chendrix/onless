@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var less = require('less');
 
 var app = module.exports = express.createServer();
 
@@ -38,8 +39,15 @@ app.get('/', function(req, res){
 
 app.post('/compile', function(req, res) {
 	var tocompile = req.body.lessinput;
-	console.log(tocompile);
-	res.redirect('back');
+	less.render(tocompile, function(e, css) {
+		console.log(css);
+		res.render('compiled', {
+			title: 'OnLess Compiled CSS',
+			uncompiled: tocompile,
+			compiledcss: css
+		});
+	
+	});
 });
 
 // Only listen on $ node app.js
