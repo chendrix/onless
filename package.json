@@ -1,0 +1,19 @@
+{
+  "author": "Christopher Hendrix <chris@material-designer.com> (www.material-designer.com)",
+  "name": "onless",
+  "description": "An online LESS to CSS compiler",
+  "version": "0.0.0",
+  "homepage": "http://onless.duostack.net",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "express":"*",
+    "jade":"*",
+    "less":"*"
+    },
+  "devDependencies": {}
+}
