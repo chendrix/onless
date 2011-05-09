@@ -1,0 +1,8 @@
+h1= title
+p Welcome to #{title}
+p= description
+
+form(action='/compile', method='post') 
+	label(for='lessinput') Add your LESS here
+	textarea#lessinput(name='lessinput')
+	input(type="submit") Submit
