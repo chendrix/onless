@@ -40,7 +40,6 @@ app.get('/', function(req, res){
 app.post('/compile', function(req, res) {
 	var tocompile = req.body.lessinput;
 	less.render(tocompile, function(e, css) {
-		console.log(css);
 		res.render('compiled', {
 			title: 'OnLess Compiled CSS',
 			uncompiled: tocompile,

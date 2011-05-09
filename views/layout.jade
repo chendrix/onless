@@ -3,4 +3,11 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js')
+    script(src='/javascripts/jquery.textarea.js')
+    script
+      jQuery(document).ready(function () {
+        $("textarea").tabby();
+      });
+    
   body!= body
