@@ -9,9 +9,9 @@ form(action='/', method='post')
 
   div.minify
     label(for='minify') Minify
-    input(type='checkbox', id='minify', value='yes', name='minify')
+    input#minify(type='checkbox', id='minify', value='yes', name='minify')
 
-  input(type="submit") Submit
+  input#submit(type="submit") Submit
 
 - if (err)
   h2 Errors
