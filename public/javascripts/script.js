@@ -1,6 +1,10 @@
+function notifyTab($el) {
+  $el.append("<p>Using TAB will tab inwards, using SHIFT+TAB will tab outwards. To tab out of the textarea, press CTRL+SHIFT+TAB.</p>");
+}
+
 jQuery(document).ready(function () {
   $("textarea").tabby();
-  $("form div.text label").append("<p>Using TAB will shift inwards, using SHIFT+TAB will tab outwards. To tab out of the textarea, press CTRL+SHIFT+TAB.</p>");
+  notifyTab($("div.text label"));
   
   $('input[type="submit"]').click(function(e){
     e.preventDefault();
@@ -18,22 +22,21 @@ jQuery(document).ready(function () {
         
         if($('#lessresponse').length != 0) {
           $('#lessresponse').fadeOut(200, function() {
-          	$(this).replaceWith($mydata, function() {
-          		$(this).fadeIn(1000);
-          	});
+          	$(this).replaceWith($mydata).fadeIn(1000, notifyTab($('#lessresponse label')));
           });
          
         }
         else { 
-          $('#output').append($mydata).hide().fadeIn(200); 
+          $('#output').append($mydata).hide().fadeIn(200, notifyTab($('#lessresponse label'))); 
         }
         
-        
-        
       }
-      
     });
+    
+    
   });
+  
+  
   
   $('#output').height($('#input').height());
   

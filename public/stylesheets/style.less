@@ -295,6 +295,9 @@ img {
 body {
   .container;
   padding-top: 40px;
+  padding-bottom: 40px;
+  background: #f7f7f7;
+  font-family: sans-serif;
 }
 .wrapper {
   .row;
@@ -310,21 +313,16 @@ body {
   
 }
 
-#output pre, #output code {
-  height: 600px;
-}
-
-#output pre {
-  
-  overflow-y: scroll;
-}
 
 
 
 
-label {
+label p {
   font-size: 0.9em;
+  margin-top: 5px;
+  font-style: italic;
 }
+
 textarea {
   width: 100%;
   resize: none;
@@ -339,11 +337,11 @@ textarea {
   margin: 10px 0;
 }
 
-h1, h2, h3 {
+h1, h2,h3 {
   margin-bottom: 10px;
 }
 h1 {
-  font-family: Georgia;
+  font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
   margin-bottom: 10px;
 }
 
@@ -355,11 +353,22 @@ form div {
   padding-bottom: 10px;
 }
 
+.minify {
+  display: inline-block;
+  font-size: 1.25em;
+}
 #minify {
   margin-left: 2em;
+  vertical-align: 10%;
 }
 
-
+#submit {
+  background-color: #333333;
+  color: white;
+  padding: 10px 20px;
+  .rounded(5px);
+  float: right;
+}
 
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
