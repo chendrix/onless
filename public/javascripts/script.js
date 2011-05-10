@@ -34,4 +34,7 @@ jQuery(document).ready(function () {
       
     });
   });
+  
+  $('#output').height($('#input').height());
+  
 });
