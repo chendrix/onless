@@ -40,18 +40,19 @@ app.post('/', function(req, res) {
 	var textToCompile = req.body.lessinput;
 	var minifyIt = req.body.minify;
 	
+	if(typeof(minifyIt) == "undefined") { minifyIt = "false"}
+	
 	var parser = new(less.Parser);
 	parser.parse(textToCompile, function(err, tree) {
 		var css;
 		var desc;
 		
-	  if (!minifyIt) {
+	  if (minifyIt == "false") {
 	    try {
 	 		  css = tree.toCSS({ compress: false });
 	 		} catch(error) {
 	 		  err = error;
 	 		}
-	   
 	 		desc = "Unminified";
 	 	} 
 	 	else {
