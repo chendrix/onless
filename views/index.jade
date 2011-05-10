@@ -1,34 +1,35 @@
-h1= title
-p Welcome to #{title}
-p= description
-
-div#input
-  h2 Input
-  form(action='/', method='post') 
-    div.text
-      label(for='lessinput') Add your LESS here
-      textarea#lessinput(name='lessinput') #{uncompiled}
+div.wrapper
+  h1= title
+  p Welcome to #{title}
+  p= description
   
-    div.minify
-      label(for='minify') Minify
-      input#minify(type='checkbox', id='minify', value='true', name='minify')
+  div#input
+    h2 Input
+    form(action='/', method='post') 
+      div.text
+        label(for='lessinput') Add your LESS here
+        textarea#lessinput(name='lessinput') #{uncompiled}
+    
+      div.minify
+        label(for='minify') Minify
+        input#minify(type='checkbox', id='minify', value='true', name='minify')
+    
+      input#submit(type="submit") Submit
   
-    input#submit(type="submit") Submit
-
-
-div#output
-  h2 Output
-  - if (err)
-    div#lessresponse
-      h3 Errors
-      pre
-        code
-          #{err.message} >> #{err.extract[1]}
-          Line: #{err.line}
-          Column: #{err.column}
-  - else if (compiledcss)
-    div#lessresponse
-      h3 #{minified} CSS
-      pre
-        code= compiledcss
+  
+  div#output
+    h2 Output
+    - if (err)
+      div#lessresponse
+        h3 Errors
+        pre
+          code
+            #{err.message} >> #{err.extract[1]}
+            Line: #{err.line}
+            Column: #{err.column}
+    - else if (compiledcss)
+      div#lessresponse
+        h3 #{minified} CSS
+        pre
+          code= compiledcss
 
