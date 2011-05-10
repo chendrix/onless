@@ -20,7 +20,7 @@ form(action='/', method='post')
       #{err.message} >> #{err.extract[1]}
       Line: #{err.line}
       Column: #{err.column}
-- else
+- else if (compiledcss)
   h2 #{minified} CSS
   pre
     code= compiledcss
