@@ -29,7 +29,7 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler()); 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
 
 
@@ -41,22 +41,31 @@ app.post('/', function(req, res) {
 	var minifyIt = req.body.minify;
 	
 	var parser = new(less.Parser);
-	parser.parse(textToCompile, function(e, tree) {
+	parser.parse(textToCompile, function(err, tree) {
 		var css;
 		var desc;
 		
-	 	if (!minifyIt) {
-	 		css = tree.toCSS({ compress: false });
+	  if (!minifyIt) {
+	    try {
+	 		  css = tree.toCSS({ compress: false });
+	 		} catch(error) {
+	 		  err = error;
+	 		}
+	   
 	 		desc = "Unminified";
 	 	} 
 	 	else {
-	 		css = tree.toCSS({ compress: true });
+	 		try {
+	 		  css = tree.toCSS({ compress: true});
+	 		} catch(error) {
+	 		  err = error;
+	 		}
 	 		desc = "Minified";
 	 	}
-	 	
+	 			
 	 	req.session.uncompiled = textToCompile;
 	 	req.session.compiledcss = css;
-	 	req.session.err = e;
+	 	req.session.err = err;
 	 	req.session.minified = desc;
 
 		res.redirect('back');

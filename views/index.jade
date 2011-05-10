@@ -13,17 +13,15 @@ form(action='/', method='post')
 
   input(type="submit") Submit
 
-
-- if (err)	
+- if (err)
   h2 Errors
   pre
     code
-    #{err.message} >> #{err.extract[1]}
-    Line: #{err.line}
-    Column: #{err.column}
-
+      #{err.message} >> #{err.extract[1]}
+      Line: #{err.line}
+      Column: #{err.column}
 - else
-  - if (compiledcss)
-    h2 #{minified} CSS
-    pre
-      code= compiledcss
+  h2 #{minified} CSS
+  pre
+    code= compiledcss
+
