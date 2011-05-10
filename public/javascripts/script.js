@@ -5,8 +5,7 @@ jQuery(document).ready(function () {
   $('input[type="submit"]').click(function(e){
     e.preventDefault();
     var lessinput = $('#lessinput').val();
-    var minify = $('#minify').val();
-    
+    var minify = $('#minify').is(':checked');
     
     $.ajax({
       type: "POST",
@@ -14,6 +13,22 @@ jQuery(document).ready(function () {
       data: { 'lessinput' : lessinput, 'minify' : minify},
       
       success: function(res) {
+      
+        var $mydata = $(res).find('#lessresponse');
+        
+        if($('#lessresponse').length != 0) {
+          $('#lessresponse').fadeOut(200, function() {
+          	$(this).replaceWith($mydata, function() {
+          		$(this).fadeIn(1000);
+          	});
+          });
+         
+        }
+        else { 
+          $('#output').append($mydata).hide().fadeIn(200); 
+        }
+        
+        
         
       }
       
