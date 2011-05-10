@@ -2,13 +2,28 @@ h1= title
 p Welcome to #{title}
 p= description
 
-form(action='/compile', method='post') 
-	div.text
-		label(for='lessinput') Add your LESS here
-		textarea#lessinput(name='lessinput')
+form(action='/', method='post') 
+  div.text
+    label(for='lessinput') Add your LESS here
+    textarea#lessinput(name='lessinput') #{uncompiled}
 
-	div.minify
-		label(for='minify') Minify
-		input(type='checkbox', id='minify', value='yes', name='minify')
-	
-	input(type="submit") Submit
+  div.minify
+    label(for='minify') Minify
+    input(type='checkbox', id='minify', value='yes', name='minify')
+
+  input(type="submit") Submit
+
+
+- if (err)	
+  h2 Errors
+  pre
+    code
+    #{err.message} >> #{err.extract[1]}
+    Line: #{err.line}
+    Column: #{err.column}
+
+- else
+  - if (compiledcss)
+    h2 #{minified} CSS
+    pre
+      code= compiledcss

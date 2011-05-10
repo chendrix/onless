@@ -15,6 +15,10 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: "keyboard cat" }));
+
   app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
@@ -28,13 +32,48 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+
+
 // Routes
 
+app.post('/', function(req, res) {
+	var textToCompile = req.body.lessinput;
+	var minifyIt = req.body.minify;
+	
+	var parser = new(less.Parser);
+	parser.parse(textToCompile, function(e, tree) {
+		var css;
+		var desc;
+		
+	 	if (!minifyIt) {
+	 		css = tree.toCSS({ compress: false });
+	 		desc = "Unminified";
+	 	} 
+	 	else {
+	 		css = tree.toCSS({ compress: true });
+	 		desc = "Minified";
+	 	}
+	 	
+	 	req.session.uncompiled = textToCompile;
+	 	req.session.compiledcss = css;
+	 	req.session.err = e;
+	 	req.session.minified = desc;
+
+		res.redirect('back');
+	});
+
+});
+
 app.get('/', function(req, res){
-  res.render('index', {
-    title: 'OnLess',
-    description: 'Your online compiler for LESS.js'
-  });
+    res.render('index', {
+      title: 'OnLess',
+      description: 'Your online compiler for LESS.js',
+      uncompiled: req.session.uncompiled,
+  		compiledcss: req.session.compiledcss,
+  		err: req.session.err,
+  		minified: req.session.minified
+    });
+
 });
 
 app.post('/compile', function(req, res) {
