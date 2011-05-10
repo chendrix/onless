@@ -3,6 +3,12 @@ p Welcome to #{title}
 p= description
 
 form(action='/compile', method='post') 
-	label(for='lessinput') Add your LESS here
-	textarea#lessinput(name='lessinput')
+	div.text
+		label(for='lessinput') Add your LESS here
+		textarea#lessinput(name='lessinput')
+
+	div.minify
+		label(for='minify') Minify
+		input(type='checkbox', id='minify', value='yes', name='minify')
+	
 	input(type="submit") Submit

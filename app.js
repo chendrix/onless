@@ -38,14 +38,30 @@ app.get('/', function(req, res){
 });
 
 app.post('/compile', function(req, res) {
-	var tocompile = req.body.lessinput;
-	less.render(tocompile, function(e, css) {
+	var textToCompile = req.body.lessinput;
+	var minifyIt = req.body.minify;
+	
+	var parser = new(less.Parser);
+	parser.parse(textToCompile, function(e, tree) {
+		var css;
+		var desc;
+		
+	 	if (!minifyIt) {
+	 		css = tree.toCSS({ compress: false });
+	 		desc = "Unminified";
+	 	} 
+	 	else {
+	 		css = tree.toCSS({ compress: true });
+	 		desc = "Minified";
+	 	}
+
 		res.render('compiled', {
 			title: 'OnLess Compiled CSS',
-			uncompiled: tocompile,
-			compiledcss: css
+			uncompiled: textToCompile,
+			compiledcss: css,
+			err: e,
+			minified: desc
 		});
-	
 	});
 });
 

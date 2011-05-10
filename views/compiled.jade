@@ -4,8 +4,17 @@ h2 LESS
 pre
 	code= uncompiled
 
-h2 CSS
-pre
-	code= compiledcss
+- if (err)	
+	h2 Errors
+	pre
+		code
+			#{err.message} >> #{err.extract[1]}
+			Line: #{err.line}
+			Column: #{err.column}
+
+- else
+	h2 #{minified} CSS
+	pre
+		code= compiledcss
 	
 a(href='/') Go Back
