@@ -417,6 +417,7 @@ label p {
   font-size: 0.9em;
   margin-top: 5px;
   font-style: italic;
+  padding-bottom: 0;
 }
 textarea {
   width: 100%;
@@ -435,9 +436,6 @@ h1, h2, h3 {
 h1 {
   font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
   margin-bottom: 10px;
-}
-#main {
-  padding-top: 1em;
 }
 form div {
   padding-bottom: 10px;
@@ -458,6 +456,9 @@ form div {
   -moz-border-radius: 5px;
   border-radius: 5px;
   float: right;
+}
+p {
+  padding-bottom: 1em;
 }
 .ir {
   display: block;
