@@ -4,7 +4,13 @@ function notifyTab($el) {
 
 jQuery(document).ready(function () {
   $("textarea").tabby();
-  notifyTab($("div.text label"));
+  notifyTab($("div.text label"), function() {
+  	
+	 	
+  });
+	$('#input .text label').css('display', 'block');
+	$('#lessresponse label').css("display", "block").height($('#input .text label').height());
+	
   
   $('input[type="submit"]').click(function(e){
     e.preventDefault();
@@ -21,13 +27,23 @@ jQuery(document).ready(function () {
         var $mydata = $(res).find('#lessresponse');
         
         if($('#lessresponse').length != 0) {
-          $('#lessresponse').fadeOut(200, function() {
-          	$(this).replaceWith($mydata).fadeIn(1000, notifyTab($('#lessresponse label')));
+          $('#lessresponse').fadeOut(100, function() {
+          	$(this).replaceWith($mydata);
+          	$('#input .text label').css('display', 'block');
+	 	  			$('#lessresponse label').css("display", "block").height($('#input .text label').height());
+
+          	$(this).fadeIn(1000);
           });
-         
         }
         else { 
-          $('#output').append($mydata).hide().fadeIn(200, notifyTab($('#lessresponse label'))); 
+        	$self = $('#output');
+          $('#output').hide(100, function() {
+          	$(this).append($mydata);
+          	$('#input .text label').css('display', 'block');
+	 	  			$('#lessresponse label').css("display", "block").height($('#input .text label').height());
+	 	  			$(this).fadeIn(200);
+	 	  			
+	 	  		})
         }
         
       }

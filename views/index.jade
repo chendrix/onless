@@ -24,7 +24,7 @@ div.wrapper
         div#lessresponse
           label(for='lessoutput')
             h3 Errors
-          textarea#lessoutput(tabindex='0', rows='20', name='lessoutput')
+          textarea#lessoutput(tabindex='0', rows='20', name='lessoutput', readonly='readonly')
               #{err.message} >> #{err.extract[1]}
               Line: #{err.line}
               Column: #{err.column}
@@ -32,5 +32,5 @@ div.wrapper
         div#lessresponse
           label(for='lessoutput')
             h3 #{minified} CSS
-          textarea#lessoutput(tabindex='0', rows='20', name='lessoutput')= compiledcss
+          textarea#lessoutput(tabindex='0', rows='20', name='lessoutput', readonly='readonly')= compiledcss
 
